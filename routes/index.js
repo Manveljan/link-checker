@@ -11,12 +11,9 @@ router.get('/url', function (req, res) {
   var queryUrl = req.query.q
   var parsedUrl = url.parse(queryUrl)
   return Promise.resolve().then(function () {
-    if (parsedUrl.protocol === 'https:') {
-      return lib.getHttpsMeta(parsedUrl)
-    } else {
-      return lib.getHttpMeta(parsedUrl)
-    }
+      return lib.getMetas(parsedUrl)
   }).then(function (result) {
+    console.log(result);
     res.json({
       status: 'ok',
       id: result.id,
